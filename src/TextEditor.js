@@ -30,16 +30,16 @@ const TextEditor = () => {
     <Grid>
       <Grid container p={2} mt={2} >
         <Grid item sm={12} md={12} lg={12} p={1} bgcolor={"#ffffff"} boxShadow={1} borderRadius={'4px'} minHeight={'500px'}>
-          <Typography variant='h4'>Pre requuest content </Typography>
+          <Typography variant='h4'>Pre request Editor </Typography>
           <Box>
             <ReactQuill
               value={editorContent}
-              onChange={handleEditorChange  }
+              onChange={handleEditorChange}
               modules={TextEditor.modules}
               formats={TextEditor.formats}
             />  
-            <Box>
-              <Button variant='outlined' onClick={handleSubmit}> sub2</Button>
+            <Box mt={2} display={'flex'} justifyContent={"flex-end"} alignItems={"flex-end"}>
+              <Button variant='outlined' onClick={handleSubmit}> Submit</Button>
             </Box>
           </Box>
         

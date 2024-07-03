@@ -1,12 +1,25 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './textEditor.css'
 
 const TextEditor = () => {
+
   const [editorContent, setEditorContent] = useState('');
+
+  const getContent = async () => {
+    const result = await axios.get('http://localhost:5000/api/content');
+    const data = await result.data.data[0].content;
+    setEditorContent(data);
+  }
+  useEffect(() => {
+    getContent();
+  }, [])
+
+
+
 
   
   const handleEditorChange = (content) => {
@@ -25,6 +38,11 @@ const TextEditor = () => {
   }
   }
 
+
+
+
+
+  
 
   return (
     <Grid>
@@ -52,18 +70,14 @@ const TextEditor = () => {
 
 TextEditor.modules = {
   toolbar: [
-    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-    [{ size: [] }],
+    
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' },
-    { 'indent': '-1' }, { 'indent': '+1' }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
     ['link', 'image', 'video'],
-    ['clean']
-  ],
+    ['clean']],
 };
 
 TextEditor.formats = [
-  'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
   'link', 'image', 'video'
